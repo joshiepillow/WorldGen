@@ -1,7 +1,7 @@
 #include "stupid.h"
 sf::Texture draw(std::vector<std::vector<int>> rooms) {
 
-	sf::Texture a;
+	/*sf::Texture a;
 	sf::Sprite room;
 	if(!a.loadFromFile("sprites/room.png")) {
 		std::cout<<"draw Errored";
@@ -24,7 +24,7 @@ sf::Texture draw(std::vector<std::vector<int>> rooms) {
 	if(!c.loadFromFile("sprites/location cursor.png")) {
 		std::cout<<"draw Errored";
 	}
-	location_cursor.setTexture(c);
+	location_cursor.setTexture(c);*/
 
 	sf::RenderTexture texture;
 	texture.create(500, 500);
@@ -43,7 +43,7 @@ sf::Texture draw(std::vector<std::vector<int>> rooms) {
 //sf::RenderTexture texture;
 //texture.create(500, 500);
 	texture.clear(sf::Color::Red);
-	texture.draw(room);
+	//texture.draw(room);
    	texture.display();
 
 
