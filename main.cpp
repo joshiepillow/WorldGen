@@ -11,24 +11,6 @@ void doot(int x, int y, int seed) {
   std::vector<std::vector<int>> rooms = generate_part1(edges[0][0], edges[1][0], edges[2][0], edges[3][0], finalSeed, length);
   rooms = generate_part2(rooms, finalSeed);
   rooms = generate_part3(rooms);
-  sf::Sprite sprite(draw(rooms));
-  sf::RenderWindow window(sf::VideoMode(64 * rooms.size(), 64 * rooms.size()), "My window");
-  while (window.isOpen())
-  {
-    sf::Event event;
-    while (window.pollEvent(event))
-    {
-      // "close requested" event: we close the window
-      if (event.type == sf::Event::Closed)
-        window.close();
-            
-    }
-    window.clear();
-    // Draw the texture
-    window.draw(sprite);
-    // End the current frame and display its contents on screen
-    window.display();
-  }
 
   std::cout << "\n";
   for (int i = rooms.size()-1; i >= 0; i--) {
@@ -37,13 +19,29 @@ void doot(int x, int y, int seed) {
       std::cout<<rooms[j][i] << " ";
     }
   }
-  std::cout<<"\n"<<time(NULL)<<"\n";
+  std::cout<<std::endl;
+
+  sf::RenderWindow window(sf::VideoMode(1024, 1024), "My window");
+  sf::Texture t = draw(rooms);
+  sf::Sprite s;
+  s.setTexture(t);
+  s.setScale(2, 2);
+  window.clear(sf::Color(255, 255, 255));
+  window.draw(s);
+  window.display();
+
+  while (window.isOpen())
+  {
+    sf::Event event;
+    while (window.pollEvent(event)){
+      if (event.type == sf::Event::Closed) window.close();
+    }
+  }
 }
 
 int main() {
   int x = 0; 
   int y = 0;
-  std::cout<<time(NULL);
   int seed = 0;
 
   doot(x, y, seed);

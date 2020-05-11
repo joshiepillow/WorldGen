@@ -1,11 +1,12 @@
 #include "stupid.h"
 sf::Texture draw(std::vector<std::vector<int>> rooms) {
-
-	/*sf::Texture a;
+	
+	sf::Texture a;
 	sf::Sprite room;
 	if(!a.loadFromFile("sprites/room.png")) {
 		std::cout<<"draw Errored";
 	}
+	
 	room.setTexture(a);
 
 	sf::Texture b;
@@ -17,42 +18,42 @@ sf::Texture draw(std::vector<std::vector<int>> rooms) {
 	hallway_hori.setTexture(b);
 	hallway_vert.setTexture(b);
 	hallway_vert.setRotation(90);
-	hallway_vert.setOrigin(0, 16);
+	hallway_vert.setOrigin(16, 16);
 	
 	sf::Texture c;
 	sf::Sprite location_cursor;
 	if(!c.loadFromFile("sprites/location cursor.png")) {
 		std::cout<<"draw Errored";
 	}
-	location_cursor.setTexture(c);*/
+	location_cursor.setTexture(c);
 
 	sf::RenderTexture texture;
-	texture.create(500, 500);
-
-	/*for (int i = 0; i < rooms.size(); i++) {
+	texture.create(rooms.size()*16, rooms[0].size()*16);
+	texture.clear(sf::Color::White);
+	
+	for (int i = 0; i < rooms.size(); i++) {
 		for (int j = 0; j < rooms[0].size(); j++) {
 			if(rooms[i][j] == 1) {
-				//room.setPosition(16 * i, 16 * j);
-				//texture.draw(room);
-			}	
+				int x = 16 * i;
+				int y = 16 * rooms[0].size() - 16 * (j + 1);
+				room.setPosition(x, y);
+				texture.draw(room);
+				if (i+1<rooms.size() && rooms[i+1][j] == 1) {
+					hallway_hori.setPosition(x, y);
+					texture.draw(hallway_hori);
+				}
+				if (j+1<rooms[0].size() && rooms[i][j+1] == 1) {
+					hallway_vert.setPosition(x, y);
+					texture.draw(hallway_vert);
+				}
+			}
 		}
-	}*/
+	}
 
-
-// Create a new render-texture
-//sf::RenderTexture texture;
-//texture.create(500, 500);
-	texture.clear(sf::Color::Red);
-	//texture.draw(room);
+	texture.draw(room);
    	texture.display();
 
 
 
-
-
-
-
-
-	sf::Texture fake(texture.getTexture());
-	return fake;
+	return texture.getTexture();
 }
