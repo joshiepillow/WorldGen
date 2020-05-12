@@ -1,7 +1,11 @@
 #include "stupid.h"
 
-std::vector<std::vector<int>> generate_part1(int up, int down, int left, int right, int seed, int length) 
+std::vector<std::vector<int>> generate_part1(std::vector<std::vector<int>> edges, int seed, int length) 
 {
+  std::vector<int> up = edges[0];
+  std::vector<int> down = edges[1];
+  std::vector<int> left = edges[2];
+  std::vector<int> right = edges[3];
   srand(seed);
 
   std::vector<std::vector<int>> dists;
@@ -33,14 +37,34 @@ std::vector<std::vector<int>> generate_part1(int up, int down, int left, int rig
   
 
   int center[2] = {length/2-rand()%2, length/2-rand()%2};
-  
-  int upPlace[2] = {up,length-1};
-  connect(center, upPlace);
-  int rightPlace[2] = {length-1,right};
-  connect(center, rightPlace);
-  int downPlace[2] = {down,0};
-  connect(center, downPlace);
-  int leftPlace[2] = {0,left};
-  connect(center, leftPlace);
+  for (int i = 0; i < up.size(); i++) {
+    int upPlace[2] = {up[i],length-1};
+    connect(center, upPlace);
+  }  
+  for (int i = 0; i < right.size(); i++) {
+    int rightPlace[2] = {length-1,right[i]};
+    connect(center, rightPlace);
+  }  
+  for (int i = 0; i < down.size(); i++) {
+    int downPlace[2] = {down[i],0};
+    connect(center, downPlace);
+  }  
+  for (int i = 0; i < left.size(); i++) {
+    int leftPlace[2] = {0,left[i]};
+    connect(center, leftPlace);
+  }  
   return rooms;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

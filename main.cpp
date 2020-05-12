@@ -8,7 +8,7 @@ void doot(int x, int y, int seed) {
   //code
   int finalSeed = getRoomSeed(x, y, seed);
   std::vector<std::vector<int>> edges = getEdges(x, y, seed, length);
-  std::vector<std::vector<int>> rooms = generate_part1(edges[0][0], edges[1][0], edges[2][0], edges[3][0], finalSeed, length);
+  std::vector<std::vector<int>> rooms = generate_part1(edges, finalSeed, length);
   rooms = generate_part2(rooms, finalSeed);
   rooms = generate_part3(rooms);
 
@@ -22,10 +22,10 @@ void doot(int x, int y, int seed) {
   std::cout<<std::endl;
 
   sf::RenderWindow window(sf::VideoMode(1024, 1024), "My window");
-  sf::Texture t = draw(rooms);
+  sf::Texture t = load_room(rooms, edges);
   sf::Sprite s;
   s.setTexture(t);
-  s.setScale(2, 2);
+  s.setScale(3, 3);
   window.clear(sf::Color(255, 255, 255));
   window.draw(s);
   window.display();
