@@ -1,9 +1,25 @@
 #include "stupid.h"
-sf::Texture add(std::vector<std::vector<int>> rooms) {
+sf::Texture add(int x, int y, sf::Texture t) {
 
+	sf::Texture d;
+	d.loadFromFile("sprites/location cursor.png");
+	sf::Sprite location_cursor(d);
+
+	sf::Sprite s(t);
+
+	sf::RenderTexture texture;
+	texture.create(t.getSize().x, t.getSize().y);
+	texture.clear(sf::Color::White);
+	texture.draw(s);
+
+	location_cursor.setPosition(16 + x * 16, 16 * 8 - y * 16);
+	texture.draw(location_cursor);
+	texture.display();
+
+	return texture.getTexture();
 }
 
-sf::Texture load_room(std::vector<std::vector<int>> rooms, std::vector<std::vector<int>> sides) {
+sf::Texture load_section(std::vector<std::vector<int>> rooms, std::vector<std::vector<int>> sides) {
 	
 	sf::Texture a;
 	a.loadFromFile("sprites/room.png");
@@ -17,10 +33,6 @@ sf::Texture load_room(std::vector<std::vector<int>> rooms, std::vector<std::vect
 	c.loadFromFile("sprites/hallway vert.png");
 	sf::Sprite hallway_vert(c);
 	hallway_vert.setOrigin(0, 16);
-	
-	sf::Texture d;
-	d.loadFromFile("sprites/location cursor.png");
-	sf::Sprite location_cursor(d);
 
 	sf::Texture e;
 	e.loadFromFile("sprites/arrow up.png");
@@ -41,7 +53,7 @@ sf::Texture load_room(std::vector<std::vector<int>> rooms, std::vector<std::vect
 
 	sf::RenderTexture texture;
 	texture.create(rooms.size()*16 + 32, rooms[0].size()*16 + 32);
-	texture.clear(sf::Color::White);
+	texture.clear(sf::Color::Red);
 	
 	for (int i = 0; i < rooms.size(); i++) {
 		for (int j = 0; j < rooms[0].size(); j++) {
@@ -68,7 +80,6 @@ sf::Texture load_room(std::vector<std::vector<int>> rooms, std::vector<std::vect
 	std::vector<int> right = sides[3];
 	int err = 5;
 	for (int i = 0; i < up.size(); i++) {
-		std::cout<<up[i] << std::endl;
 		arrow_up.setPosition(16 + up[i]*16, err);
 		texture.draw(arrow_up);
 	}
