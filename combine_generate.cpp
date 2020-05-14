@@ -1,6 +1,7 @@
 #include "stupid.h"
 
 std::vector<std::vector<std::vector<int>>> combine_generate(int x, int y, int seed) {
+	std::cout << x << " " << y << "\n";
 	//adjustable variables
 	int length = 8;
 

@@ -15,7 +15,7 @@ int main() {
   };
 
   sf::RenderWindow window(sf::VideoMode(1024, 1024), "My window");
-  std::vector load = combine_generate(seed, worldx, worldy);
+  std::vector load = combine_generate(worldx, worldy, seed);
   std::vector rooms = load[0];
   std::vector edges = load[1];
   sf::Texture section = load_section(rooms, edges);
@@ -51,7 +51,7 @@ int main() {
         if (mod(x, rooms.size()) != x) {
           if (x < 0) worldx--; else worldx++;
           x = mod(x, rooms.size());
-          load = combine_generate(seed, worldx, worldy);
+          load = combine_generate(worldx, worldy, seed);
           rooms = load[0];
           edges = load[1];
           section = load_section(rooms, edges);
@@ -59,7 +59,7 @@ int main() {
         if (mod(y, rooms.size()) != y) {
           if (y < 0) worldy--; else worldy++;
           y = mod(y, rooms.size());
-          load = combine_generate(seed, worldx, worldy);
+          load = combine_generate(worldx, worldy, seed);
           rooms = load[0];
           edges = load[1];
           section = load_section(rooms, edges);
